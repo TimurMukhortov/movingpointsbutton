@@ -1,17 +1,28 @@
 package github.com.elsemtim.movingpointsbutton
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.support.v7.app.AppCompatActivity
+import android.view.animation.Animation
+import kotlinx.android.synthetic.main.activity_sample.*
 
 class SampleActivity : AppCompatActivity() {
+
+    var flag = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sample)
-        val circle = findViewById<View>(R.id.circle) as Circle
-        val animation = CircleAngleAnimation(circle, 360)
+        val animation = CircleAngleAnimation(circle, 260)
         animation.duration = 1000
-        circle.startAnimation(animation)
+        animation.repeatCount = Animation.INFINITE
+        circle.setOnClickListener({
+            if (!flag) {
+                circle.startAnimation(animation)
+                flag = !flag
+            } else {
+                circle.clearAnimation()
+                flag = !flag
+            }
+        })
     }
 }
