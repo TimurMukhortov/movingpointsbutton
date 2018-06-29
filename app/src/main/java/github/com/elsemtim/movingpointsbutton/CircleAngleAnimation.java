@@ -13,22 +13,21 @@ import android.view.animation.Transformation;
 
 public class CircleAngleAnimation extends Animation {
 
-    private Circle circle;
+    private CircleMovingButton circleMovingButton;
 
-    private float oldAngle;
-    private float newAngle;
+    private float oldRadius;
+    private float newRadius;
 
-    public CircleAngleAnimation(Circle circle, int newAngle) {
-        this.oldAngle = circle.getAngle();
-        this.newAngle = newAngle;
-        this.circle = circle;
+    public CircleAngleAnimation(CircleMovingButton circleMovingButton, int newRadius) {
+        this.oldRadius = circleMovingButton.getRadius();
+        this.newRadius = newRadius;
+        this.circleMovingButton = circleMovingButton;
     }
 
     @Override
     protected void applyTransformation(float interpolatedTime, Transformation transformation) {
-        float angle = oldAngle + ((newAngle - oldAngle) * interpolatedTime);
-
-        circle.setAngle(angle);
-        circle.requestLayout();
+        float radius = oldRadius + ((newRadius - oldRadius) * interpolatedTime);
+        circleMovingButton.setRadius(radius);
+        circleMovingButton.requestLayout();
     }
 }

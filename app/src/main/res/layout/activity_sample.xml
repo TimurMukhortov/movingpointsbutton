@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".SampleActivity">
 
-    <github.com.elsemtim.movingpointsbutton.Circle
+    <github.com.elsemtim.movingpointsbutton.CircleMovingButton
         android:id="@+id/circle"
         android:layout_width="300dp"
         android:layout_height="300dp"
+        app:backgroundColor="@color/colorRed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
