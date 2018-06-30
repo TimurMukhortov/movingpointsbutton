@@ -11,14 +11,14 @@ import android.view.animation.Transformation;
  **/
 
 
-public class CircleAngleAnimation extends Animation {
+public class CircleRadiusAnimation extends Animation {
 
     private CircleMovingButton circleMovingButton;
 
     private float oldRadius;
     private float newRadius;
 
-    public CircleAngleAnimation(CircleMovingButton circleMovingButton, int newRadius) {
+    public CircleRadiusAnimation(CircleMovingButton circleMovingButton, int newRadius) {
         this.oldRadius = circleMovingButton.getRadius();
         this.newRadius = newRadius;
         this.circleMovingButton = circleMovingButton;

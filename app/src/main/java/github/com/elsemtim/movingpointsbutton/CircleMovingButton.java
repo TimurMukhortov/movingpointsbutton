@@ -60,6 +60,47 @@ public class CircleMovingButton extends View {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int widthMode = View.MeasureSpec.getMode(widthMeasureSpec);
+        int heightMode = View.MeasureSpec.getMode(heightMeasureSpec);
+
+        int widthSize = View.MeasureSpec.getSize(widthMeasureSpec);
+        int heightSize = View.MeasureSpec.getSize(heightMeasureSpec);
+
+        int width;
+        switch (widthMode) {
+            case MeasureSpec.EXACTLY:
+                width = widthSize;
+                break;
+            case MeasureSpec.AT_MOST:
+                width = 100;
+                break;
+            case MeasureSpec.UNSPECIFIED:
+                width = 100;
+                break;
+            default:
+                width = 100;
+        }
+
+        int height;
+        switch (heightMode) {
+            case MeasureSpec.EXACTLY:
+                height = heightSize;
+                break;
+            case MeasureSpec.AT_MOST:
+                height = 50;
+                break;
+            case MeasureSpec.UNSPECIFIED:
+                height = 50;
+                break;
+            default:
+                height = 50;
+        }
+
+        setMeasuredDimension(width, height);
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 //        canvas.drawArc(rect, START_ANGLE_POINT, radius, false, paint);
