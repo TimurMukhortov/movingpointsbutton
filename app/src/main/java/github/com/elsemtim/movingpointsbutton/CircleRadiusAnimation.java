@@ -22,6 +22,7 @@ public class CircleRadiusAnimation extends Animation {
         this.oldRadius = circleMovingButton.getRadius();
         this.newRadius = newRadius;
         this.circleMovingButton = circleMovingButton;
+        circleMovingButton.setMaxRadius(newRadius);
     }
 
     @Override

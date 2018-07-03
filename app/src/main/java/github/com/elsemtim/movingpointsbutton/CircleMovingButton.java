@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -25,6 +26,9 @@ public class CircleMovingButton extends View {
 
     private final Paint paint;
     private float radius;
+    private float maxRadius;
+
+    private List<Circle> circleList;
 
     public CircleMovingButton(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -48,12 +52,17 @@ public class CircleMovingButton extends View {
         //default radius circle
         radius = 10;
 
+        circleList = new ArrayList<>();
+
         try {
             paint = new Paint();
             paint.setColor(backgroundColor);
             paint.setAntiAlias(true);
             paint.setStyle(Paint.Style.FILL);
             paint.setStrokeWidth(strokeWidth);
+            circleList.add(new Circle(250, 500, radius, paint));
+            circleList.add(new Circle(500, 500, radius, paint));
+            circleList.add(new Circle(750, 500, radius, paint));
         } finally {
             a.recycle();
         }
@@ -104,9 +113,12 @@ public class CircleMovingButton extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 //        canvas.drawArc(rect, START_ANGLE_POINT, radius, false, paint);
-        canvas.drawCircle(250, 500, radius, paint);
-        canvas.drawCircle(500, 500, radius, paint);
-        canvas.drawCircle(750, 500, radius, paint);
+//        canvas.drawCircle(250, 500, radius, paint);
+//        canvas.drawCircle(500, 500, radius, paint);
+//        canvas.drawCircle(750, 500, radius, paint);
+        for (Circle circle : circleList){
+            circle.draw(canvas);
+        }
 
     }
 
@@ -115,6 +127,26 @@ public class CircleMovingButton extends View {
     }
 
     public void setRadius(float radius) {
+        if (radius <= maxRadius / 3) {
+            Log.i("test", "=== 1/3");
+            circleList.get(0).setRadius(radius);
+        } else {
+            if (radius <= (maxRadius / 3) * 2) {
+                Log.i("test", "=== 2/3");
+                circleList.get(1).setRadius(radius);
+            } else {
+                Log.i("test", "=== 3/3");
+                circleList.get(2).setRadius(radius);
+            }
+        }
         this.radius = radius;
+    }
+
+    public float getMaxRadius() {
+        return maxRadius;
+    }
+
+    public void setMaxRadius(float maxRadius) {
+        this.maxRadius = maxRadius;
     }
 }
