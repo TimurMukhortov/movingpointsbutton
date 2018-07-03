@@ -16,14 +16,14 @@ class SampleActivity : AppCompatActivity() {
         animation.duration = 1000
         animation.repeatCount = Animation.INFINITE
         animation.repeatMode = Animation.REVERSE
-        circle.setOnClickListener({
-            if (!flag) {
+        circle.setOnClickListener {
+            flag = if (!flag) {
                 circle.startAnimation(animation)
-                flag = !flag
+                !flag
             } else {
                 circle.clearAnimation()
-                flag = !flag
+                !flag
             }
-        })
+        }
     }
 }
