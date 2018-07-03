@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.RectF;
+import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -22,7 +22,7 @@ import github.com.elsemtim.movingpointsbutton.objects.Circle;
  **/
 
 
-public class CircleMovingButton extends View {
+public class CircleMovingButton extends AppCompatButton {
 
     private final Paint paint;
     private float radius;
@@ -46,7 +46,6 @@ public class CircleMovingButton extends View {
         int backgroundColor = a.getColor(R.styleable.CircleMovingButton_backgroundColor, 0xff000000);
 
 
-        //size 200x200 example
         final int strokeWidth = 40;
 
         //default radius circle
@@ -112,10 +111,6 @@ public class CircleMovingButton extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-//        canvas.drawArc(rect, START_ANGLE_POINT, radius, false, paint);
-//        canvas.drawCircle(250, 500, radius, paint);
-//        canvas.drawCircle(500, 500, radius, paint);
-//        canvas.drawCircle(750, 500, radius, paint);
         for (Circle circle : circleList){
             circle.draw(canvas);
         }
