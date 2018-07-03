@@ -127,16 +127,15 @@ public class CircleMovingButton extends View {
     }
 
     public void setRadius(float radius) {
+            Log.i("test", "radius = "+radius);
         if (radius <= maxRadius / 3) {
-            Log.i("test", "=== 1/3");
             circleList.get(0).setRadius(radius);
         } else {
             if (radius <= (maxRadius / 3) * 2) {
-                Log.i("test", "=== 2/3");
-                circleList.get(1).setRadius(radius);
+                circleList.get(1).setRadius(radius/2);
             } else {
-                Log.i("test", "=== 3/3");
-                circleList.get(2).setRadius(radius);
+                if (radius <= maxRadius)
+                circleList.get(2).setRadius(radius/3);
             }
         }
         this.radius = radius;
