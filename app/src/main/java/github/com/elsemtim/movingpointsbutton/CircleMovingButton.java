@@ -24,11 +24,30 @@ import github.com.elsemtim.movingpointsbutton.objects.Circle;
 
 public class CircleMovingButton extends AppCompatButton {
 
-    private final Paint paint;
+    private enum State {
+        PROGRESS, IDLE, DONE, STOPED
+    }
+
+    private State bState;
+
+    private Paint paint;
     private float radius;
     private float maxRadius;
 
     private List<Circle> circleList;
+
+    /**
+     * @param context
+     */
+    public CircleMovingButton(Context context) {
+        super(context);
+        init(context, null, 0, 0);
+    }
+
+    /**
+     * @param context
+     * @param attrs
+     */
 
     public CircleMovingButton(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -65,6 +84,28 @@ public class CircleMovingButton extends AppCompatButton {
         } finally {
             a.recycle();
         }
+    }
+
+    /**
+     *
+     * @param context
+     * @param attrs
+     * @param defStyleAttr
+     */
+    public CircleMovingButton(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init(context, attrs, 0, 0);
+    }
+
+    /**
+     *
+     * @param context
+     * @param attrs
+     * @param defStyleAttr
+     * @param defStyleRes
+     */
+    private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+
     }
 
     @Override
@@ -111,7 +152,7 @@ public class CircleMovingButton extends AppCompatButton {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        for (Circle circle : circleList){
+        for (Circle circle : circleList) {
             circle.draw(canvas);
         }
 
@@ -122,15 +163,15 @@ public class CircleMovingButton extends AppCompatButton {
     }
 
     public void setRadius(float radius) {
-            Log.i("test", "radius = "+radius);
+        Log.i("test", "radius = " + radius);
         if (radius <= maxRadius / 3) {
             circleList.get(0).setRadius(radius);
         } else {
             if (radius <= (maxRadius / 3) * 2) {
-                circleList.get(1).setRadius(radius/2);
+                circleList.get(1).setRadius(radius / 2);
             } else {
                 if (radius <= maxRadius)
-                circleList.get(2).setRadius(radius/3);
+                    circleList.get(2).setRadius(radius / 3);
             }
         }
         this.radius = radius;
