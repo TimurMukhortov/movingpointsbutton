@@ -29,6 +29,7 @@ public class CircleMovingButton extends AppCompatButton {
     }
 
     private State bState;
+    private Params bParams;
 
     private Paint paint;
     private float radius;
@@ -105,7 +106,14 @@ public class CircleMovingButton extends AppCompatButton {
      * @param defStyleRes
      */
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        bParams = new Params();
+    }
 
+    /**
+     * Class with all the params to configure the button.
+     */
+    private class Params{
+        private int bBackgroundColor;
     }
 
     @Override
