@@ -130,13 +130,13 @@ public class CircleMovingButton extends AppCompatButton {
                 width = widthSize;
                 break;
             case MeasureSpec.AT_MOST:
-                width = 100;
+                width = 200;
                 break;
             case MeasureSpec.UNSPECIFIED:
-                width = 100;
+                width = 200;
                 break;
             default:
-                width = 100;
+                width = 200;
         }
 
         int height;
@@ -145,14 +145,32 @@ public class CircleMovingButton extends AppCompatButton {
                 height = heightSize;
                 break;
             case MeasureSpec.AT_MOST:
-                height = 50;
+                height = 100;
                 break;
             case MeasureSpec.UNSPECIFIED:
-                height = 50;
+                height = 100;
                 break;
             default:
-                height = 50;
+                height = 100;
         }
+
+        float halfHeight = height / 2;
+
+        float firstCircleX = width / 6;
+        float secondCircleX = width / 2;
+        float thirdCircleX = secondCircleX + firstCircleX;
+
+        //First circle
+        circleList.get(0).setCy(halfHeight);
+        circleList.get(0).setCx(firstCircleX);
+
+        //Second circle
+        circleList.get(1).setCy(halfHeight);
+        circleList.get(1).setCx(secondCircleX);
+
+        //Third circle
+        circleList.get(2).setCy(halfHeight);
+        circleList.get(2).setCx(thirdCircleX);
 
         setMeasuredDimension(width, height);
     }
