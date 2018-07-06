@@ -79,16 +79,15 @@ public class CircleMovingButton extends AppCompatButton {
             paint.setAntiAlias(true);
             paint.setStyle(Paint.Style.FILL);
             paint.setStrokeWidth(strokeWidth);
-            circleList.add(new Circle(250, 500, radius, paint));
-            circleList.add(new Circle(500, 500, radius, paint));
-            circleList.add(new Circle(750, 500, radius, paint));
+            circleList.add(new Circle(radius, paint));
+            circleList.add(new Circle(radius, paint));
+            circleList.add(new Circle(radius, paint));
         } finally {
             a.recycle();
         }
     }
 
     /**
-     *
      * @param context
      * @param attrs
      * @param defStyleAttr
@@ -99,7 +98,6 @@ public class CircleMovingButton extends AppCompatButton {
     }
 
     /**
-     *
      * @param context
      * @param attrs
      * @param defStyleAttr
@@ -112,7 +110,7 @@ public class CircleMovingButton extends AppCompatButton {
     /**
      * Class with all the params to configure the button.
      */
-    private class Params{
+    private class Params {
         private int bBackgroundColor;
     }
 

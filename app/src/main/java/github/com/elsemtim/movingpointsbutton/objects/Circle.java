@@ -17,6 +17,22 @@ public class Circle implements BaseObjectInterface {
     private float radius;
     private Paint paint;
 
+    /**
+     *
+     * @param radius
+     * @param paint
+     */
+    public Circle(float radius, Paint paint){
+        this(0, 0, radius, paint);
+    }
+
+    /**
+     *
+     * @param cx
+     * @param cy
+     * @param radius
+     * @param paint
+     */
     public Circle(float cx, float cy, float radius, Paint paint){
         this.cx = cx;
         this.cy = cy;
