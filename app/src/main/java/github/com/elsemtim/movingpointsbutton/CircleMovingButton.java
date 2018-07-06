@@ -158,7 +158,7 @@ public class CircleMovingButton extends AppCompatButton {
 
         float firstCircleX = width / 6;
         float secondCircleX = width / 2;
-        float thirdCircleX = secondCircleX + firstCircleX;
+        float thirdCircleX = width - firstCircleX;
 
         //First circle
         circleList.get(0).setCy(halfHeight);
