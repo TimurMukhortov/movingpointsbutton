@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.os.Handler;
+import android.support.annotation.UiThread;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -23,13 +25,13 @@ import github.com.elsemtim.movingpointsbutton.objects.Circle;
 
 
 public class CircleMovingButton extends AppCompatButton {
+    private static final String TAG = CircleMovingButton.class.getSimpleName();
+    private final Handler handler;
 
-    private enum State {
-        PROGRESS, IDLE, DONE, STOPED
-    }
+//    private final Runnable dotAnimationRunnable;
 
-    private State bState;
     private Params bParams;
+    private boolean isAnimation;
 
     private Paint paint;
     private float radius;
@@ -41,8 +43,7 @@ public class CircleMovingButton extends AppCompatButton {
      * @param context
      */
     public CircleMovingButton(Context context) {
-        super(context);
-        init(context, null, 0, 0);
+        this(context, null);
     }
 
     /**
@@ -51,7 +52,17 @@ public class CircleMovingButton extends AppCompatButton {
      */
 
     public CircleMovingButton(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    /**
+     * @param context
+     * @param attrs
+     * @param defStyleAttr
+     */
+    public CircleMovingButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs);
+        this.handler = new Handler();
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs,
                 R.styleable.CircleMovingButton,
@@ -85,16 +96,6 @@ public class CircleMovingButton extends AppCompatButton {
         } finally {
             a.recycle();
         }
-    }
-
-    /**
-     * @param context
-     * @param attrs
-     * @param defStyleAttr
-     */
-    public CircleMovingButton(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init(context, attrs, 0, 0);
     }
 
     /**
@@ -182,23 +183,39 @@ public class CircleMovingButton extends AppCompatButton {
 
     }
 
+    @UiThread
+    public void startDotAnimation() {
+        if (!this.isAnimation) {
+            this.isAnimation = true;
+//            this.handler.post(this.dotAnimationRunnable);
+        }
+    }
+
+    @UiThread
+    public void stopDotAnimation() {
+        this.isAnimation = false;
+        try {
+//            this.handler.removeCallbacks(this.dotAnimationRunnable);
+        } catch (Exception e) {
+            Log.e(TAG, "stopDotAnimation: weird crash", e);
+        }
+    }
+
+
     public float getRadius() {
         return radius;
     }
 
-    public void setRadius(float radius) {
-        Log.i("test", "radius = " + radius);
-        if (radius <= maxRadius / 3) {
-            circleList.get(0).setRadius(radius);
-        } else {
-            if (radius <= (maxRadius / 3) * 2) {
-                circleList.get(1).setRadius(radius / 2);
-            } else {
-                if (radius <= maxRadius)
-                    circleList.get(2).setRadius(radius / 3);
+    public void setRadius(float angle) {
+        float phase = (float) -0.2;
+        for (int i = 0; i < circleList.size(); i++) {
+            float radiusFactor = ((angle + phase * i) + 1) % 1;
+            if (radiusFactor > 0.5) {
+                radiusFactor = (float) (0.5 - (radiusFactor - 0.5));
             }
+            radiusFactor *= 2;
+            circleList.get(i).setRadius(maxRadius * (radiusFactor));
         }
-        this.radius = radius;
     }
 
     public float getMaxRadius() {

@@ -1,5 +1,6 @@
 package github.com.elsemtim.movingpointsbutton;
 
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
@@ -27,8 +28,14 @@ public class CircleRadiusAnimation extends Animation {
 
     @Override
     protected void applyTransformation(float interpolatedTime, Transformation transformation) {
-        float radius = oldRadius + ((newRadius - oldRadius) * interpolatedTime);
-        circleMovingButton.setRadius(radius);
+//        float radius = oldRadius + ((newRadius - oldRadius) * interpolatedTime);
+        Log.i("Test1", "time: " + interpolatedTime);
+//        float doubleInterpolatedTime = interpolatedTime * 2;
+//        if (doubleInterpolatedTime > 1) {
+//            doubleInterpolatedTime = 1 - (doubleInterpolatedTime - 1);
+//
+//        }
+        circleMovingButton.setRadius(interpolatedTime);
         circleMovingButton.requestLayout();
     }
 }

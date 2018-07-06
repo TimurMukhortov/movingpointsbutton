@@ -12,10 +12,10 @@ class SampleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sample)
-        val animation = CircleRadiusAnimation(circle, 100)
+        val animation = CircleRadiusAnimation(circle, 20)
         animation.duration = 1000
         animation.repeatCount = Animation.INFINITE
-        animation.repeatMode = Animation.REVERSE
+//        animation.repeatMode = Animation.REVERSE
         circle.setOnClickListener {
             flag = if (!flag) {
                 circle.startAnimation(animation)
