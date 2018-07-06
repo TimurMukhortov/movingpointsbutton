@@ -209,7 +209,7 @@ public class CircleMovingButton extends AppCompatButton {
     public void setRadius(float angle) {
         float phase = (float) -0.2;
         for (int i = 0; i < circleList.size(); i++) {
-            float radiusFactor = ((angle + phase * i) + 1) % 1;
+            float radiusFactor = ((angle + phase * i) + 100) % 1;
             if (radiusFactor > 0.5) {
                 radiusFactor = (float) (0.5 - (radiusFactor - 0.5));
             }
