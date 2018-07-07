@@ -31,10 +31,9 @@ import github.com.elsemtim.movingpointsbutton.objects.Circle;
 
 
 public class CircleMovingButton extends AppCompatButton {
-    private static final String TAG = CircleMovingButton.class.getSimpleName();
-//    private final Handler handler;
-
-//    private final Runnable dotAnimationRunnable;
+    private enum State {
+        PROGRESS, IDLE
+    }
 
     private Params bParams;
     private boolean isAnimation;
@@ -46,6 +45,8 @@ public class CircleMovingButton extends AppCompatButton {
 
     private float targetScale = 0.0F;
     private float scale = targetScale;
+
+    private String text;
 
     private List<Circle> circleList;
 
@@ -96,13 +97,9 @@ public class CircleMovingButton extends AppCompatButton {
                 0, 0
         );
 
-        /**
-         *
-         * Parcelable default values for our view.
-         *
-         **/
+        bParams.bState = State.IDLE;
         bParams.bBackgroundColor = a.getColor(R.styleable.CircleMovingButton_backgroundColor, 0xff000000);
-
+        bParams.bText = super.getText().toString();
 
         final int strokeWidth = 40;
 
@@ -129,6 +126,8 @@ public class CircleMovingButton extends AppCompatButton {
      * Class with all the params to configure the button.
      */
     private class Params {
+        private State bState;
+        private String bText;
         private int bBackgroundColor;
     }
 
@@ -191,18 +190,24 @@ public class CircleMovingButton extends AppCompatButton {
         setMeasuredDimension(width, height);
     }
 
+    /**
+     *
+     * @param canvas
+     */
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        for (Circle circle : circleList) {
-            circle.draw(canvas);
+        if (bParams.bState == State.PROGRESS) {
+            for (Circle circle : circleList) {
+                circle.draw(canvas);
+            }
         }
-
     }
-
 
     public void startDotAnimation() {
         stopDotAnimation();
+        bParams.bState = State.PROGRESS;
+        super.setText(null);
         if (animatorSet == null) {
             animatorSet = new AnimatorSet();
             List<Animator> animations = new ArrayList<>(2);
@@ -238,7 +243,9 @@ public class CircleMovingButton extends AppCompatButton {
 
     public void stopDotAnimation() {
         if (isAnimating()) {
+            bParams.bState = State.IDLE;
             animatorSet.cancel();
+            super.setText(bParams.bText);
         }
     }
 
@@ -256,5 +263,10 @@ public class CircleMovingButton extends AppCompatButton {
             radiusFactor *= 2;
             circleList.get(i).setRadius(maxRadius * (radiusFactor));
         }
+    }
+
+    @Override
+    protected void onAnimationStart() {
+        super.onAnimationStart();
     }
 }
