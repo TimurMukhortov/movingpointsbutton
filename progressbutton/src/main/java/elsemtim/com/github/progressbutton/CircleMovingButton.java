@@ -1,4 +1,4 @@
-package github.com.elsemtim.movingpointsbutton;
+package elsemtim.com.github.progressbutton;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -16,12 +16,12 @@ import android.view.animation.LinearInterpolator;
 import java.util.ArrayList;
 import java.util.List;
 
-import github.com.elsemtim.movingpointsbutton.objects.Circle;
+import elsemtim.com.github.progressbutton.objects.Circle;
 
 /**
  * @author: timur.mukhortov
- * date: 29.06.2018
- * time: 17:08
+ * date: 07.07.2018
+ * time: 16:26
  * @LinkedIn: linkedin.com/in/timurmukhortov
  **/
 

@@ -1,4 +1,4 @@
-package github.com.elsemtim.movingpointsbutton.objects;
+package elsemtim.com.github.progressbutton.objects;
 
 import android.graphics.Canvas;
 
