@@ -3,17 +3,13 @@ package github.com.elsemtim.movingpointsbutton;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
-import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.support.annotation.UiThread;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
@@ -36,7 +32,6 @@ public class CircleMovingButton extends AppCompatButton {
     }
 
     private Params bParams;
-    private boolean isAnimation;
     private AnimatorSet animatorSet;
 
     private Paint paint;
@@ -45,8 +40,6 @@ public class CircleMovingButton extends AppCompatButton {
 
     private float targetScale = 0.0F;
     private float scale = targetScale;
-
-    private String text;
 
     private List<Circle> circleList;
 
@@ -73,13 +66,6 @@ public class CircleMovingButton extends AppCompatButton {
      */
     public CircleMovingButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs);
-//        this.handler = new Handler();
-//        this.dotAnimationRunnable = new Runnable() {
-//            @Override
-//            public void run() {
-//                Log.i("test33", "start");
-//            }
-//        };
         init(context, attrs, defStyleAttr, defStyleAttr);
     }
 
@@ -103,7 +89,6 @@ public class CircleMovingButton extends AppCompatButton {
 
         final int strokeWidth = 40;
 
-        //default radius circle
         radius = 10;
 
         circleList = new ArrayList<>();
@@ -131,6 +116,11 @@ public class CircleMovingButton extends AppCompatButton {
         private int bBackgroundColor;
     }
 
+    /**
+     *
+     * @param widthMeasureSpec
+     * @param heightMeasureSpec
+     */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int widthMode = View.MeasureSpec.getMode(widthMeasureSpec);
@@ -239,7 +229,6 @@ public class CircleMovingButton extends AppCompatButton {
         }
         animatorSet.start();
     }
-
 
     public void stopDotAnimation() {
         if (isAnimating()) {
