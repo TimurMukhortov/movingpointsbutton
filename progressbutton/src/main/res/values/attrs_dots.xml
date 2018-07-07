@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="CircleMovingButton">
+        <attr name="backgroundColor" format="color" />
+    </declare-styleable>
+</resources>
