@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
@@ -63,6 +64,51 @@ public class CircleMovingButton extends AppCompatButton {
     public CircleMovingButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs);
         this.handler = new Handler();
+        init(context, attrs, defStyleAttr, defStyleAttr);
+//        this.handler = new Handler();
+//        TypedArray a = context.getTheme().obtainStyledAttributes(
+//                attrs,
+//                R.styleable.CircleMovingButton,
+//                0, 0
+//        );
+//
+//        /**
+//         *
+//         * Parcelable default values for our view.
+//         *
+//         **/
+//        int backgroundColor = a.getColor(R.styleable.CircleMovingButton_backgroundColor, 0xff000000);
+//
+//
+//        final int strokeWidth = 40;
+//
+//        //default radius circle
+//        radius = 10;
+//
+//        circleList = new ArrayList<>();
+//
+//        try {
+//            paint = new Paint();
+//            paint.setColor(backgroundColor);
+//            paint.setAntiAlias(true);
+//            paint.setStyle(Paint.Style.FILL);
+//            paint.setStrokeWidth(strokeWidth);
+//            circleList.add(new Circle(radius, paint));
+//            circleList.add(new Circle(radius, paint));
+//            circleList.add(new Circle(radius, paint));
+//        } finally {
+//            a.recycle();
+//        }
+    }
+
+    /**
+     * @param context
+     * @param attrs
+     * @param defStyleAttr
+     * @param defStyleRes
+     */
+    private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        bParams = new Params();
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs,
                 R.styleable.CircleMovingButton,
@@ -74,7 +120,7 @@ public class CircleMovingButton extends AppCompatButton {
          * Parcelable default values for our view.
          *
          **/
-        int backgroundColor = a.getColor(R.styleable.CircleMovingButton_backgroundColor, 0xff000000);
+        bParams.bBackgroundColor = a.getColor(R.styleable.CircleMovingButton_backgroundColor, 0xff000000);
 
 
         final int strokeWidth = 40;
@@ -86,7 +132,7 @@ public class CircleMovingButton extends AppCompatButton {
 
         try {
             paint = new Paint();
-            paint.setColor(backgroundColor);
+            paint.setColor(bParams.bBackgroundColor);
             paint.setAntiAlias(true);
             paint.setStyle(Paint.Style.FILL);
             paint.setStrokeWidth(strokeWidth);
@@ -96,16 +142,6 @@ public class CircleMovingButton extends AppCompatButton {
         } finally {
             a.recycle();
         }
-    }
-
-    /**
-     * @param context
-     * @param attrs
-     * @param defStyleAttr
-     * @param defStyleRes
-     */
-    private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        bParams = new Params();
     }
 
     /**
